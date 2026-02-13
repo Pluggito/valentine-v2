@@ -3,9 +3,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { buildPrompt } from "@/lib/prompts";
 import { ValentineData } from "@/lib/valentine-data";
 
-const genAI = new GoogleGenerativeAI(
-  process.env.NEXT_PUBLIC_GEMINI_API_KEY || "",
-);
+const genAI = new GoogleGenerativeAI(process.env.NEXT_GEMINI_API_KEY || "");
 
 export async function POST(request: NextRequest) {
   try {
