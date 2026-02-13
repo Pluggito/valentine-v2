@@ -1,12 +1,12 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, ArrowLeft, Share2, Copy, Check } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 
-export default function MessagePage() {
+function MessagePageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -273,5 +273,28 @@ export default function MessagePage() {
         )}
       </AnimatePresence>
     </main>
+  );
+}
+
+export default function MessagePage() {
+  return (
+    <Suspense
+      fallback={
+        <main
+          className="flex items-center justify-center min-h-screen p-6"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fce7f3, #fee2e2, #fce7f3)",
+          }}
+        >
+          <div className="text-center">
+            <div className="text-6xl mb-4">💌</div>
+            <p className="text-xl text-pink-600">Loading...</p>
+          </div>
+        </main>
+      }
+    >
+      <MessagePageContent />
+    </Suspense>
   );
 }
